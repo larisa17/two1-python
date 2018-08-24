@@ -24,7 +24,8 @@ install_requires = [
     'pyaes',
     'pytest',
     'pyyaml',
-    'requests<=2.11.1',
+    'requests',
+    #'requests<=2.11.1',
     'sha256',
     'tabulate',
 ]

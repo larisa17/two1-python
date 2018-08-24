@@ -2,7 +2,17 @@
 import requests
 import urllib.parse as parse
 from pkg_resources import parse_version
-from pkg_resources import SetuptoolsVersion
+####
+# current version 40.2.0
+# v39.0.0 (setuptools)
+# 17 Mar 2018
+# 1296: Setuptools now vendors its own direct dependencies, no longer relying on the dependencies as vendored
+# by pkg_resources.
+# 296: Removed long-deprecated support for iteration on Version objects as returned by pkg_resources.parse_version.
+# Removed the SetuptoolsVersion and SetuptoolsLegacyVersion names as well. They should not have been used,
+# but if they were, replace with Version and LegacyVersion from packaging.version.
+####
+from pkg_resources import packaging
 from distutils.version import LooseVersion
 
 import two1
@@ -36,7 +46,7 @@ def is_version_gte(actual, expected):
         ValueError: if expected ot actual version is not in Major.Minor.Patch
             format.
     """
-    if isinstance(parse_version(actual), SetuptoolsVersion):
+    if isinstance(parse_version(actual), packaging.version.Version):
         # This handles versions that end in things like `rc0`
         return parse_version(actual) >= parse_version(expected)
     else:
